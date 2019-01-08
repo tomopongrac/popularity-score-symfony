@@ -1,0 +1,8 @@
+security:
+  firewalls:
+    api_token:
+      pattern: ^/api/token$
+      security: false
+    api:
+      pattern: ^/score
+      security: false
