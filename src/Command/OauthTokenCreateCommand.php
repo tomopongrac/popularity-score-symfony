@@ -17,10 +17,9 @@ class OauthTokenCreateCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('app:oauth-token:create')
-            ->setDescription('Create a new OAuth token for client credentials')
+            ->setName('app:oauth-token:create') ->setDescription('Create a new OAuth token for client credentials')
             ->addOption('client_id', null, InputOption::VALUE_OPTIONAL, 'Client ID', getenv('CLIENT_ID'))
-            ->addOption('secret', null, InputOption::VALUE_OPTIONAL, 'Secret', getenv('SECRET'))
+            ->addOption('secret', null, InputOption::VALUE_OPTIONAL, 'Secret', getenv('CLIENT_SECRET'))
         ;
     }
 
@@ -30,7 +29,7 @@ class OauthTokenCreateCommand extends Command
 
         $client = new Client();
 
-        $response = $client->post('http://127.0.0.1:8002/token', [
+        $response = $client->post(getenv('APP_URL') . '/token', [
             'form_params' => [
                 'grant_type' => 'client_credentials',
                 'client_id' => $input->getOption('client_id'),
